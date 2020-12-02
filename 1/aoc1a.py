@@ -6,6 +6,6 @@ with open(sys.argv[1], "r") as f:
 
 for a,b in itertools.combinations(nums, 2):
     if a + b == 2020:
-        print("%d + %d = 2020" % ( a, b ) )
-        print("%d * %d = %d" % ( a, b, a * b ) )
+        print("{a} + {b} = 2020".format(a=a, b=b))
+        print("{a} * {b} = {prod}".format(a=a, b=b, prod=a * b))
 
