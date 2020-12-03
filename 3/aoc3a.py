@@ -1,4 +1,5 @@
 import sys
+from typing import List
 
 #    ..##.......
 #    #...#...#..
@@ -12,7 +13,7 @@ import sys
 #    #...##....#
 #    .#..#...#.#
 
-def ReadGrid(filename):
+def ReadGrid(filename: str):
     grid = []
     with open(filename, "r") as f:
         for line in f:
@@ -21,7 +22,7 @@ def ReadGrid(filename):
                 grid.append(line.strip())
     return grid
 
-def GetGridElement(grid, row, col):
+def GetGridElement(grid: List[str], row: int, col: int):
     grid_row = grid[row]
     grid_col = grid_row[col % len(grid_row)]
     return grid_col
