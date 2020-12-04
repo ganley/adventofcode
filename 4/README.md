@@ -12,3 +12,9 @@ aoc4b.py -> input.txt -> 116
 
 I realized later that even `hgt` can be done as a (only slightly ugly) regex,
 but I'm going to leave it this way.
+
+Also, an AoC lesson today: I added the special handling for the final record
+that may not be followed by a newline, but many people I've talked to just
+added a newline to the end of the input file instead. Given that I'm not a
+contender anyway (due to not doing them at midnight), I feel okay about doing
+it the "right" way.
