@@ -3,9 +3,9 @@ import sys
 with open(sys.argv[1], "r") as f:
     total = 0
     questions = set()
-    for line in f:
-        if line.strip():
-            questions.update([c for c in line.strip()])
+    for rawline in f:
+        if line := rawline.strip():
+            questions.update([c for c in line])
         else:   # blank line
             total += len(questions)
             questions.clear()
