@@ -1,6 +1,8 @@
 import sys
 from typing import List
 
+
+
 #    ..##.......
 #    #...#...#..
 #    .#....#..#.
@@ -13,32 +15,37 @@ from typing import List
 #    #...##....#
 #    .#..#...#.#
 
-def ReadGrid(filename: str):
+
+
+def read_grid(filename: str):
     grid = []
     with open(filename, "r") as f:
         for line in f:
-            row = line.strip()
-            if row:
+            if row := line.strip():
                 grid.append(line.strip())
     return grid
 
-def GetGridElement(grid: List[str], row: int, col: int):
+
+
+def get_grid_element(grid: List[str], row: int, col: int):
     grid_row = grid[row]
     grid_col = grid_row[col % len(grid_row)]
     return grid_col
 
-grid = ReadGrid(sys.argv[1])
+
+
+grid = read_grid(sys.argv[1])
 grid_height = len(grid)
 delta_row = 1
 delta_col = 3
 
-row = 0
-col = 0
+row,col = 0,0
 trees = 0
 while row < grid_height:
-    if GetGridElement(grid, row, col) == "#":
+    if get_grid_element(grid, row, col) == "#":
         trees += 1
     row += delta_row
     col += delta_col
 
 print(trees)
+
