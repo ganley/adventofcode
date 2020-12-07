@@ -39,14 +39,15 @@ with open(sys.argv[1], "r") as f:
     valid = 0
     fields = {}
     for line in f:
-        vals = line.strip().split()
-        if vals:
+        if vals := line.strip().split():
             for k,val in [ v.split(":") for v in vals ]:
                 fields[k] = val
         else:    # blank line
             valid += check(fields)
             fields.clear()
     valid += check(fields)     # last record may have no blank line after
+
+
 
 print(valid)
 
