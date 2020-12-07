@@ -56,11 +56,12 @@ def total_bags_contained(parent_graph, color):
 
 
 
-parent_graph,child_graph = build_graph(sys.argv[1])
+if __name__ == "__main__":
+    parent_graph,child_graph = build_graph(sys.argv[1])
 
-# part 1:
-print(len(ancestors(child_graph, "shiny_gold")))
+    # part 1:
+    print(len(ancestors(child_graph, "shiny_gold")))
 
-# part 2:
-print(total_bags_contained(parent_graph, "shiny_gold"))
+    # part 2:
+    print(total_bags_contained(parent_graph, "shiny_gold"))
 
