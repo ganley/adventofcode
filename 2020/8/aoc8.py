@@ -14,13 +14,11 @@ def run(mem):
     while not pc in visited and 0 <= pc < len(mem):
         visited.add(pc)
 
-        if mem[pc][0] == "acc":
-            acc += int(mem[pc][1])
-            pc += 1
-        elif mem[pc][0] == "jmp":
-            pc += int(mem[pc][1])
-        elif mem[pc][0] == "nop":
-            pc += 1
+        acc, pc = {
+            "acc": (acc + mem[pc][1], pc + 1),
+            "jmp": (acc, pc + mem[pc][1]),
+            "nop": (acc, pc + 1)
+        }[mem[pc][0]]
 
     return (acc, pc)
 
@@ -44,7 +42,8 @@ def mutate(mem):
 
 if __name__ == "__main__":
     with open(sys.argv[1], "r") as f:
-        mem = [instr.split() for instr in f.readlines()]
+        mem = [[ins, int(opd)] for ins, opd in
+               [instr.split() for instr in f.readlines()]]
 
     # part 1
     print(run(mem)[0])
