@@ -1,3 +1,4 @@
+import copy
 import functools
 import itertools
 import re
