@@ -21,15 +21,16 @@ def run(mem):
 
 def mutate(mem):
     for i in range(len(mem)):
-        newmem = copy.deepcopy(mem)
         if mem[i][0] == "jmp":
-            newmem[i][0] = "nop"
-            acc, pc = run(newmem)
+            mem[i][0] = "nop"
+            acc, pc = run(mem)
+            mem[i][0] = "jmp"   # restore
             if pc == len(mem):
                 return (acc, pc)
         elif mem[i][0] == "nop":
-            newmem[i][0] = "jmp"
-            acc, pc = run(newmem)
+            mem[i][0] = "jmp"
+            acc, pc = run(mem)
+            mem[i][0] = "nop"   # restore
             if pc == len(mem):
                 return (acc, pc)
 
