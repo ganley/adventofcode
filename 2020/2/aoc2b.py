@@ -5,13 +5,13 @@ import sys
 # 2-9 c: ccccccccc
 
 valid = 0
-with open (sys.argv[1], "r") as f:
+with open(sys.argv[1], "r") as f:
     for line in f:
-        occ,char,pwd = line.strip().split()
+        occ, char, pwd = line.strip().split()
         char = char.strip(":")
-        ix = [ int(x) for x in occ.split("-") ]
-        count = len([ i for i in ix if pwd[i - 1] == char ])
+        ix = [int(x) for x in occ.split("-")]
+        count = len([i for i in ix if pwd[i - 1] == char])
         if count == 1:
             valid += 1
-            
+
 print(valid)
