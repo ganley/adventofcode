@@ -4,6 +4,8 @@ import sys
 # child (upward): child_color ->  { parent_color : n }
 
 # returns (parent_graph, child_graph)
+
+
 def build_graph(filename):
     with open(filename, "r") as f:
         child = {}
@@ -13,7 +15,7 @@ def build_graph(filename):
             parent_color = tok.pop(0) + "_" + tok.pop(0)
             assert tok.pop(0) == "bags" and tok.pop(0) == "contain"
 
-            assert not parent_color in parent
+            assert parent_color not in parent
             parent[parent_color] = {}
 
             while tok:
@@ -29,12 +31,11 @@ def build_graph(filename):
                 assert tok.pop(0).startswith("bag")
 
                 if child_color != "other":
-                    if not child_color in child:
+                    if child_color not in child:
                         child[child_color] = {}
                     child[child_color][parent_color] = num
 
     return (parent, child)
-
 
 
 def ancestors(child_graph, color):
@@ -45,23 +46,20 @@ def ancestors(child_graph, color):
     return list(set(anc))
 
 
-
 # do *not* count the outermost bag
 def total_bags_contained(parent_graph, color):
     weight = 0
-    for child_color,w in parent_graph.get(color, {}).items():
+    for child_color, w in parent_graph.get(color, {}).items():
         weight += w
         weight += w * total_bags_contained(parent_graph, child_color)
     return weight
 
 
-
 if __name__ == "__main__":
-    parent_graph,child_graph = build_graph(sys.argv[1])
+    parent_graph, child_graph = build_graph(sys.argv[1])
 
     # part 1:
     print(len(ancestors(child_graph, "shiny_gold")))
 
     # part 2:
     print(total_bags_contained(parent_graph, "shiny_gold"))
-
