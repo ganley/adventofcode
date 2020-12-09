@@ -6,7 +6,7 @@ def run(mem):
     pc = 0
     acc = 0
     visited = set()
-    while not pc in visited and 0 <= pc < len(mem):
+    while pc not in visited and 0 <= pc < len(mem):
         visited.add(pc)
 
         acc, pc = {
