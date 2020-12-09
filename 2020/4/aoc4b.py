@@ -2,21 +2,19 @@ import re
 import sys
 
 
-
 regexs = {
-    "byr": "(19[2-9]\d|200[0-2])$",
-    "iyr": "(201\d|2020)$",
-    "eyr": "(202\d|2030)$",
-    "hgt": "\d+(cm|in)$",
-    "hcl": "\#[\dA-Fa-f]{6}$",
+    "byr": "(19[2-9]\\d|200[0-2])$",
+    "iyr": "(201\\d|2020)$",
+    "eyr": "(202\\d|2030)$",
+    "hgt": "\\d+(cm|in)$",
+    "hcl": "\\#[\\dA-Fa-f]{6}$",
     "ecl": "(amb|blu|brn|gry|grn|hzl|oth)$",
-    "pid": "\d{9}$"
+    "pid": "\\d{9}$"
 }
 
 
-
 def check(fields):
-    for k,r in regexs.items():
+    for k, r in regexs.items():
         if not (k in fields and re.match(r, fields[k])):
             return 0
 
@@ -34,13 +32,12 @@ def check(fields):
     return 1
 
 
-
 with open(sys.argv[1], "r") as f:
     valid = 0
     fields = {}
     for line in f:
         if vals := line.strip().split():
-            for k,val in [ v.split(":") for v in vals ]:
+            for k, val in [v.split(":") for v in vals]:
                 fields[k] = val
         else:    # blank line
             valid += check(fields)
@@ -48,6 +45,4 @@ with open(sys.argv[1], "r") as f:
     valid += check(fields)     # last record may have no blank line after
 
 
-
 print(valid)
-
