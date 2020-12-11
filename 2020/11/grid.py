@@ -55,29 +55,25 @@ class Grid:
             s += "\n"
         return s[:-1]     # drop the last \n
 
-    # dict of immediate neighbor state counts in each of the 8 directions
-    def neighbors(self, x, y):
-        neigh = []
-        for dx in range(-1, 2):
-            for dy in range(-1, 2):
-                if dx != 0 or dy != 0:
-                    if c := self.get(x + dx, y + dy):
-                        neigh.append(c)
-        return Counter(neigh)
+    # eight compass directions
+    deltas = [(-1, -1), (-1, 0), (-1, 1), (0, -1),
+              (0, 1), (1, -1), (1, 0), (1, 1)]
 
-    # neighbors but the nearest visible along each direction
-    def visible_neighbors(self, x, y):
+    # neighbors within given distance along each compass direction
+    # only the first neighbor encountered in each direction is counted
+    # specifying dist=0 means look all the way to the edges
+    def neighbors(self, x, y, dist=1):
+        if dist == 0:
+            dist = self.height + self.width      # effectively infinity
         neigh = []
-        for dx in range(-1, 2):
-            for dy in range(-1, 2):
-                if dx != 0 or dy != 0:
-                    cx, cy = x+dx, y+dy
-                    while cx >= 0 and cy >= 0 and cx < self.width and cy < self.height:
-                        if v := self.get(cx, cy):
-                            neigh.append(v)
-                            break
-                        cx += dx
-                        cy += dy
+        for dx, dy in Grid.deltas:
+            cx, cy = x + dx, y + dy
+            for d in range(dist):
+                if v := self.get(cx, cy):
+                    neigh.append(v)
+                    break
+                cx += dx
+                cy += dy
         return Counter(neigh)
 
     # count of cells with the given state
