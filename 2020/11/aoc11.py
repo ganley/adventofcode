@@ -1,5 +1,3 @@
-from collections import Counter
-import copy
 import sys
 
 from grid import Grid
