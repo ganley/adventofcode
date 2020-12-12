@@ -2,7 +2,7 @@
 
 You have a set of voltage adapters, each of which can work at a particular
 number of "jolts", with a margin of up to 3 jolts. The set of adapters is
-such that ever adapter handles either 1 more or 3 more jolts than the next
+such that every adapter handles either 1 more or 3 more jolts than the next
 smallest one.
 
 Part 1: Figure out the number of adapters that handle 1 more than the next
@@ -26,3 +26,6 @@ sample2.txt -> aoc10.py -> 220 (part 1) and 19208 (part 2)
 
 input.txt -> aoc10.py -> 2475 (part 1) and 442136281481216 (part 2)
 
+Note: The problem specification stated that there could be adapters with a
+gap of 2 from the next-lower one, but none appear in the input. Beware for
+this to potentially appear in a future puzzle.
