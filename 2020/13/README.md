@@ -20,8 +20,8 @@ that tells us how to compute a number *x* such that *x* mod *aᵢ* = *nᵢ*
 for all *i*. The key observations that allow us to apply the CRT are that
 first, the inputs are all prime (they all have to be relatively prime to each
 other in order for the CRT to work), and second, we're looking for an *x* such
-that *x* mod *a₁* = 0, *x* + 1 mod *a₂* = 0, etc. The crucial insight
-is that *x* + *k* mod *a* = 0 implies that *x* mod *a* = *a* - *k*. That
+that *x* mod *a₁* = 0, (*x* + 1) mod *a₂* = 0, etc. The crucial insight
+is that (*x* + *k*) mod *a* = 0 implies that *x* mod *a* = *a* - *k*. That
 observation gives us the coefficients to plug into the CRT.
 
 I grabbed the CRT code from
