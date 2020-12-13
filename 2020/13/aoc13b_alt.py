@@ -20,9 +20,8 @@ if __name__ == "__main__":
         tm = int(tm_str)
         buses = [1 if b == "x" else int(b) for b in buses_str.split(",")]
 
-    n = [b for b in buses if b != 1]
-
-    t = 0
+    assert buses[0] != 1
+    t = buses[0]
     while True:
         print(f"checking {t=}")
         c = check(t, buses)
