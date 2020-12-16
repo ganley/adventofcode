@@ -1,3 +1,4 @@
+import math
 import sys
 
 
@@ -26,7 +27,7 @@ def parse_tickets(txt):
 
 
 # returns ( valid: bool, total of invalid values: int )
-# (necessary because the invalid values might be 0's)
+# (both are necessary because the invalid values might be 0's)
 def validate(ticket, rules):
     err = 0
     valid = True
@@ -41,8 +42,8 @@ def validate(ticket, rules):
     return (valid, err)
 
 
-# for a given ticket, return a list of lists, each element of which is the
-# fields whose rules that ticket entry satisfies
+# for a given ticket, return a list, each element of which is the list of
+# fields whose rules that ticket element satisfies
 def possible_fields(ticket, rules):
     fields = []
     for v in ticket:
@@ -57,6 +58,10 @@ def possible_fields(ticket, rules):
 # given a list of the lists-of-lists returned by possible_fields(), merge them
 # all into a single list of lists of possible fields by intersecting the
 # set of field names in each position
+#
+# in other words, this takes the list of lists of possible fields for each
+# ticket element across a number of tickets, and merges them into a single
+# list of lists of possible fields
 def merge_possible(possible):
     s = [set(f) for f in possible[0]]
     for p in possible[1:]:
@@ -73,7 +78,8 @@ def removed(x, a):
 # the indices for which there is only one possible field name, and then
 # removing that field name from all the other indices' possible-fields lists
 #
-# it is definitely possible to do this much more efficiently, but no need today
+# it is definitely possible to do this more cleanly and efficiently, but no
+# need today
 def solve_assignment(possible):
     d = {}
     while True:
@@ -83,7 +89,7 @@ def solve_assignment(possible):
                 d[p[0]] = i
                 progress = True
         if not progress:
-            assert not any(possible)
+            assert not any(possible)   # make sure we have a complete solution
             return d
         for f in d.keys():
             possible = [removed(f, a) for a in possible]
@@ -106,8 +112,6 @@ if __name__ == "__main__":
     pf = [possible_fields(f, rules) for f in [mine] + nearby]
     mpf = merge_possible(pf)
     asgn = solve_assignment(mpf)
-    p = 1
-    for k, v in asgn.items():
-        if k.startswith("departure"):
-            p *= mine[v]
+    p = math.prod([mine[v]
+                   for k, v in asgn.items() if k.startswith("departure")])
     print("Part 2:", p)
