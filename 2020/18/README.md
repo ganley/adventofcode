@@ -22,3 +22,7 @@ sample1.txt -> 71 (part 1) and 231 (part 2)
 sample2.txt -> 51 (both parts)
 
 input.txt -> 12956356593940 (part 1) and 94240043727614 (part 2)
+
+A coworker made a Python class that redefined `__add__` and `__mul__` to do
+each other's operations, and then swapped those operators in the input and
+evaluated.
