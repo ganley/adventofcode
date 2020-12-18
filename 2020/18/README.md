@@ -5,6 +5,8 @@ Parsing mathematical expressions!
 When I learned compilers, I was taught that the
 "[railroad](https://en.wikipedia.org/wiki/Shunting-yard_algorithm)" algorithm
 was the best way to parse math expressions, and it worked great here.
+Hat tip to Professor J. A. N. Lee, who first taught me about this back in the
+late 1980's.
 
 Part 1: Evaluate an expression with (single-digit, it turns out, and I rely
 on that) numbers, `+`, and `*`, and parentheses, but `+` and `*` have equal
