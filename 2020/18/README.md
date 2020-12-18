@@ -17,4 +17,8 @@ The code for part 1 and part 2 are both in aoc18.py, with part 1 commented
 out. (They're both just calls to the same machinery with different sets of
 precedences.)
 
-sample1.txt -> 
+sample1.txt -> 71 (part 1) and 231 (part 2)
+
+sample2.txt -> 51 (both parts)
+
+input.txt -> 12956356593940 (part 1) and 94240043727614 (part 2)
