@@ -21,6 +21,9 @@ it produced the right answer, so I'm going to let it go. To do it right, it
 would be a fairly simple matter to check `(rule42){1}`, `(rule42){2}`, etc.
 instead of just `(rule42)+`.
 
+Addendum: this troubled me, so I went back and wrote it the right way as
+`aoc19right.py`.
+
 sample.txt -> aoc19.py -> 2 (part 1) and error (part 2 N/A)
 
 input.txt -> aoc19.py -> 200 (part 1) and 407 (part 2)
