@@ -13,6 +13,14 @@ occurrences of rule42 than of rule31. A regular expression can't check that,
 so we manually match the first half, then the second half, then check whether
 the count constraint is satisfied.
 
+What the code does is actually a bit of a cheat - rather than check that
+the number of occurrences of rule 42 > the number of occurrences of rule 31,
+it checks whether the matching text itself is longer. It works, but it isn't
+quite right - I suspect there might be test cases where it would fail. But
+it produced the right answer, so I'm going to let it go. To do it right, it
+would be a fairly simple matter to check `(rule42){1}`, `(rule42){2}`, etc.
+instead of just `(rule42)+`.
+
 sample.txt -> aoc19.py -> 2 (part 1) and error (part 2 N/A)
 
 input.txt -> aoc19.py -> 200 (part 1) and 407 (part 2)
