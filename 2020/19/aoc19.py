@@ -31,11 +31,11 @@ if __name__ == "__main__":
     msgs = [line.strip() for line in msg_sect.split()]
 
     # part 1
-    rex = re.compile("^" + regex(0, rules) + "$")
+    rex = re.compile(regex(0, rules) + "$")
     print("Part 1:", len([m for m in msgs if rex.match(m)]))
 
     # part 2
-    rex_front = re.compile(f"^{regex(42, rules)}+")
+    rex_front = re.compile(f"{regex(42, rules)}+")
     rex_back = re.compile(f"({regex(31, rules)})+$")
 
     c = 0
