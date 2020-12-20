@@ -11,9 +11,16 @@ are many improvements possible. The elegant solution I considered but didn't
 write was to build a graph whose vertices are oriented tiles and that has
 edges between compatible tiles, and then find a grid subgraph. (It's a bit
 trickier than that due to having to not use the same tile twice, and due to
-both vertical and horizontal compatibility, but anyway.)
+both vertical and horizontal compatibility, but anyway.) Even aside from such
+fancy business, my solution does a *lot* of unnecessary copying.
 
 sample.txt -> aoc20.py -> 20899048083289 (part 1) and 273 (part 2)
 
 input.txt -> aoc20.py -> 47213728755493 (part 1) and 1599 (part 2)
 
+Later, a coworker pointed out a property that was given that I missed, and
+that could be used to make the solution more efficient: The sides that face
+the outside won't match any other tile. I was actually lucky to miss this,
+because it lures you into an easy solution for part 1 (the corners are the
+only tiles with two edges that don't match any others) that doesn't help you
+at all in part 2.
