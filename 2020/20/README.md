@@ -12,7 +12,8 @@ write was to build a graph whose vertices are oriented tiles and that has
 edges between compatible tiles, and then find a grid subgraph. (It's a bit
 trickier than that due to having to not use the same tile twice, and due to
 both vertical and horizontal compatibility, but anyway.) Even aside from such
-fancy business, my solution does a *lot* of unnecessary copying.
+fancy business, my solution does a *lot* of unnecessary copying, most of which
+could be eliminated with a little work.
 
 sample.txt -> aoc20.py -> 20899048083289 (part 1) and 273 (part 2)
 
