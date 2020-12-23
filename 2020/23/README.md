@@ -36,3 +36,6 @@ Compile aoc23b.cpp in the obvious way.
 aoc23b.cpp with sample input -> 149245887792
 
 aoc23b.cpp with real input -> 248009574232
+
+I later realized I could have stuck with Python and just used a dictionary
+mapping label to next label. Oh well.
