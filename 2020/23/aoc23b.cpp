@@ -10,14 +10,12 @@ class Node
    public:
     Node(const int label)
     :   m_label(label),
-        m_next(nullptr),
-        m_prev(nullptr)
+        m_next(nullptr)
     {
     }
 
     int m_label;
     Node* m_next;
-    Node* m_prev;
 };
 
 
@@ -37,13 +35,9 @@ Node* go(const string& txt, const int num_moves)
     const int max = 1000000;
 
     // build the linked list
-    nodes[1]->m_prev = nodes[1000000];
-    nodes[1]->m_next = nodes[2];
-    for (int i = 2; i <= 999999; i++) {
-        nodes[i]->m_prev = nodes[i - 1];
+    for (int i = 1; i <= 999999; i++) {
         nodes[i]->m_next = nodes[i + 1];
     }
-    nodes[1000000]->m_prev = nodes[999999];
     nodes[1000000]->m_next = nodes[1];
 
     // index the first 9 (since their label doesn't match their index)
@@ -61,7 +55,6 @@ Node* go(const string& txt, const int num_moves)
         Node* after_pull = pull3->m_next;
 
         // remove pulled sub-list
-        after_pull->m_prev = curr;
         curr->m_next = after_pull;
 
         // find the destination label
@@ -85,9 +78,7 @@ Node* go(const string& txt, const int num_moves)
         assert(dest_node->m_label == dest);
         Node* after_dest = dest_node->m_next;
         dest_node->m_next = pull;
-        pull->m_prev = dest_node;
         pull3->m_next = after_dest;
-        after_dest->m_prev = pull3;
 
         // advance the current cup
         curr = curr->m_next;
