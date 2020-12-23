@@ -8,11 +8,16 @@ using namespace std;
 class Node
 {
    public:
-    Node(int label) : m_next(nullptr), m_prev(nullptr), m_label(label) {}
+    Node(const int label)
+    :   m_label(label),
+        m_next(nullptr),
+        m_prev(nullptr)
+    {
+    }
 
+    int m_label;
     Node* m_next;
     Node* m_prev;
-    int m_label;
 };
 
 
