@@ -21,8 +21,9 @@ part 2 from scratch in a different language. The Python version performed only
 search -- the `index` function -- to find the index of an element in a
 million-element list is very slow.)
 
-I suspect that it might be possible to do essentialy what I did in C++ in
-Python, but I wasn't confident enough to go down that rabbit hole.
+I suspect that it might be possible to do essentially what I did in C++ in
+Python, but I wasn't sufficiently confident that would be fast enough to go
+that route.
 
 For both parts, the sample and input values are hardwired in the code; you
 have to uncommment the one you want.
