@@ -1,5 +1,7 @@
 # Day 15
 
+[Puzzle](https://adventofcode.com/2020/day/15)
+
 Today's lesson: Read the problem carefully.
 
 Given a starting sequence of numbers, "speak" subsequent numbers by this

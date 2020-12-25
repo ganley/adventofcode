@@ -1,5 +1,7 @@
 # Day 17
 
+[Puzzle](https://adventofcode.com/2020/day/17)
+
 Started from my code for Day 11. All I had to do was add a dimension and then
 add another dimension, and of course adjust the generation rules.
 

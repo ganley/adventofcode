@@ -1,5 +1,7 @@
 # Day 11
 
+[Puzzle](https://adventofcode.com/2020/day/11)
+
 Cellular automaton! When I first got into computers in my early teens, I was
 *obsessed* with cellular automata. I learned assembly language because
 Conway's Game of Life didn't run fast enough on my TRS-80 in BASIC.

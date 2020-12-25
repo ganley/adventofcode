@@ -1,5 +1,7 @@
 # Day 4
 
+[Puzzle](https://adventofcode.com/2020/day/4)
+
 aoc4a.py -> sample1.txt -> 2
 
 aoc4a.py -> input.txt -> 200

@@ -1,5 +1,7 @@
 # Day 9
 
+[Puzzle](https://adventofcode.com/2020/day/9)
+
 Part 1: Given a list of numbers, find one not in the first 25 (the "preamble")
 that is not the sum of any two numbers in the preamble.
 

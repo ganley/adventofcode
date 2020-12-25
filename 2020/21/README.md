@@ -1,5 +1,7 @@
 # Day 21
 
+[Puzzle](https://adventofcode.com/2020/day/21)
+
 We are given a series of scrambled ingredient lists and plaintext allergen
 warnings, such that some ingredients in each list decrypt to the given
 allergens.

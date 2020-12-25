@@ -1,5 +1,7 @@
 # Day 12
 
+[Puzzle](https://adventofcode.com/2020/day/12)
+
 You have a ship with a position and heading, and are given a series of
 instructions.
 

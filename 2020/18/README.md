@@ -1,5 +1,7 @@
 # Day 18
 
+[Puzzle](https://adventofcode.com/2020/day/18)
+
 Parsing mathematical expressions!
 
 When I learned compilers, I was taught that the

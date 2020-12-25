@@ -1,5 +1,7 @@
 # Day 19
 
+[Puzzle](https://adventofcode.com/2020/day/19)
+
 You are given a bunch of text-matching rules, and then a bunch of strings to
 validate against those rules. We are told that there are no loops in the rule
 set. My strategy is to convert the rules into a regular expression and then

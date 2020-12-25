@@ -1,5 +1,7 @@
 # Day 20
 
+[Puzzle](https://adventofcode.com/2020/day/20)
+
 This was a fiddly one. Luckily this is [not the first time](http://patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&p=1&u=%2Fnetahtml%2FPTO%2Fsearch-bool.html&r=1&f=G&l=50&co1=AND&d=PTXT&s1=6161078.PN.&OS=PN/6161078&RS=PN/6161078)
 I've worked with rotations and orientations.
 

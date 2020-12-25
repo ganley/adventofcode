@@ -1,5 +1,7 @@
 # Day 10
 
+[Puzzle](https://adventofcode.com/2020/day/10)
+
 You have a set of voltage adapters, each of which can work at a particular
 number of "jolts", with a margin of up to 3 jolts. The set of adapters is
 such that every adapter handles either 1 more or 3 more jolts than the next

@@ -1,5 +1,7 @@
 # Day 16
 
+[Puzzle](https://adventofcode.com/2020/day/16)
+
 We're given rules for each field name, each of which is a pair of allowable
 numerical ranges, and then a bunch of tickets, each of which is a list of
 integers.

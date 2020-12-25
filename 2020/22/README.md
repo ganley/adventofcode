@@ -1,5 +1,7 @@
 # Day 22
 
+[Puzzle](https://adventofcode.com/2020/day/22)
+
 Strangely, this isn't the first time I've written code to play this game
 (the nonrecursive part-1 version). Some years ago I wrote code to play the
 kind with a normal deck of cards, in order to use simulation to assess

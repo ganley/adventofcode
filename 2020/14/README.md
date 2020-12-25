@@ -1,5 +1,7 @@
 # Day 14
 
+[Puzzle](https://adventofcode.com/2020/day/14)
+
 Binary manipulation. I made a classic AoC blunder: I did Part 1 using bitwise
 operations, and that trapped me into that mindset, but Part 2 is better
 done by keeping the string representations. The version you see here was

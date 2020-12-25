@@ -1,5 +1,7 @@
 # Day 7
 
+[Puzzle](https://adventofcode.com/2020/day/7)
+
 Yay, graphs!
 
 sample.txt -> aoc7.py -> 4 (part 1) and 32 (part 2)

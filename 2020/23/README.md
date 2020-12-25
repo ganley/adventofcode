@@ -1,5 +1,7 @@
 # Day 23
 
+[Puzzle](https://adventofcode.com/2020/day/23)
+
 Play a game: You have a ring of cups labeled 1 through 9 (not in order).
 At each turn, take the 3 cups clockwise of the current cup. Choose a
 destination cup that is the first cup whose label is less than the current

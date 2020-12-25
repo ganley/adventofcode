@@ -1,5 +1,7 @@
 # Day 6
 
+[Puzzle](https://adventofcode.com/2020/day/6)
+
 sample.txt -> aoc6a.py -> 11
 
 input.txt -> aoc6a.py -> 6911

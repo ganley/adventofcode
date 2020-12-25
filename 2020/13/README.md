@@ -1,5 +1,7 @@
 # Day 13
 
+[Puzzle](https://adventofcode.com/2020/day/13)
+
 Fun with number theory.
 
 Given: A start time and a set of intervals. Each interval *n* is either "x" or
