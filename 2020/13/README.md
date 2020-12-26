@@ -39,7 +39,7 @@ sample.txt -> aoc13b.py -> 1068781
 input.txt -> aoc13b.py -> 725850285300475
 
 Addendum: It turns out that searching is plenty fast if you apply a simple but
-clever observation that I owe to my colleage Bradley Welsh. Namely, from a
+clever observation that I owe to my colleague Bradley Welsh. Namely, from a
 timestamp that works for the first *n* buses, you can skip forward from there
 by the product of all *n* of those bus numbers. This is implemented in
 `aoc13b_alt.py`.
