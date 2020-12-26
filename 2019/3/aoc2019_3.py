@@ -1,9 +1,3 @@
-import copy
-import functools
-import itertools
-import math
-import re
-import string
 import sys
 
 
@@ -12,7 +6,7 @@ def path_to_segments(path):
     x, y = 0, 0
     for d in path.split(","):
         x0, y0 = x, y
-        direction,magnitude = d[0], int(d[1:])
+        direction, magnitude = d[0], int(d[1:])
         dx, dy = {
             "U": (0, 1),
             "R": (1, 0),
@@ -23,7 +17,6 @@ def path_to_segments(path):
         y += dy * magnitude
         segs.append(((x0, y0), (x, y)))
     return segs
-
 
 
 def intersect(seg0, seg1):
@@ -77,14 +70,16 @@ def find_closest_intersection(segs0, segs1):
 
 def find_mindelay_intersection(segs0, segs1):
     x, y = max_coords([segs0, segs1])
-    bestdelay = sum([l1dist(s[0], s[1]) for s in segs0] + [l1dist(s[0], s[1]) for s in segs1])
+    bestdelay = sum([l1dist(s[0], s[1]) for s in segs0]
+                    + [l1dist(s[0], s[1]) for s in segs1])
     delay0 = 0
     for s0 in segs0:
         delay1 = 0
         for s1 in segs1:
             cross = intersect(s0, s1)
             if cross:
-                delay = delay0 + delay1 + l1dist(s0[0], cross) + l1dist(s1[0], cross)
+                delay = delay0 + delay1 + \
+                    l1dist(s0[0], cross) + l1dist(s1[0], cross)
                 if delay < bestdelay and delay > 0:
                     bestdelay = delay
                     x, y = cross
@@ -105,4 +100,3 @@ if __name__ == "__main__":
 
     _, delay = find_mindelay_intersection(segs0, segs1)
     print("Part 2:", delay)
-
