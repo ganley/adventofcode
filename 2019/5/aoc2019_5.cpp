@@ -46,12 +46,52 @@ constexpr size_t MAX_OPERANDS = 3;  // maximum operands an instruction can have
 
 void decode_instruction(const size_t instruction,
                         size_t& opcode,
-                        size_t addr_mode[MAX_OPERANDS])
+                        size_t *addr_mode)      // addr_mode[MAX_OPERANDS]
 {
     opcode = instruction % 100;
     for (size_t i = 0, op = instruction / 100; i < MAX_OPERANDS; ++i, op /= 10) {
         addr_mode[i] = op % 10;
     }
+}
+
+
+
+void decode_operands(const int* const program,
+                     size_t& pc,
+                     const size_t opd_count,
+                     const size_t* addr_mode,
+                     size_t* operands)
+{
+    assert(opd_count <= MAX_OPERANDS);
+    for (int i = 0; i < opd_count; ++i) {
+        const size_t raw = program[pc++];
+        operands[i] = addr_mode[i] == 0 ? program[raw] : raw;
+    }
+}
+
+
+
+void debug_instr(const int instruction,
+                 const size_t opd_count,
+                 const size_t* const addr_mode,
+                 const size_t* const operands)
+{
+    cerr << "instr " << instruction << " = " << (instruction % 100) << "/";
+    assert(opd_count <= MAX_OPERANDS);
+    for (int i = 0; i < opd_count; ++i) {
+        if (i > 0) {
+            cerr << ".";
+        }
+        cerr << addr_mode[i];
+    }
+    cerr << " (";
+    for (int i = 0; i < opd_count; ++i) {
+        if (i > 0) {
+            cerr << ",";
+        }
+        cerr << operands[i];
+    }
+    cerr << ")\n";
 }
 
 
@@ -65,6 +105,9 @@ void run_intcode(int* program, const size_t length, const bool debug = false)
 
     size_t pc = 0;
     while (pc < length && program[pc] != 99) {
+        if (debug) {
+            cerr << "PC=" << pc << "\n";
+        }
         const size_t instruction = program[pc++];
         size_t opcode;
         size_t addr_mode[MAX_OPERANDS];
@@ -72,47 +115,40 @@ void run_intcode(int* program, const size_t length, const bool debug = false)
         switch (opcode) {
             case 1:         // add (1) and multiply (2)
             case 2: {
-                const size_t src0 = program[pc++];
-                const int opd0 = addr_mode[0] == 0 ? program[src0] : src0;
-                const size_t src1 = program[pc++];
-                const int opd1 = addr_mode[1] == 0 ? program[src1] : src1;
-                assert(addr_mode[2] == 0);  // destination always immediate
-                const size_t dst = program[pc++];
-                program[dst] = opcode == 1 ? opd0 + opd1 : opd0 * opd1;
+                addr_mode[2] = 1;       // destination address
+                size_t opd[3];
+                decode_operands(program, pc, 3, addr_mode, opd);
                 if (debug) {
-                    cerr << "instr " << instruction << " = " << opcode
-                         << "/" << addr_mode[0] << "." << addr_mode[1] << "."
-                         << addr_mode[2] << " ==> " << "src0=" << src0
-                         << " opd0=" << opd0 << " src1=" << src1
-                         << " opd1=" << opd1 << ": [" << dst << "] := "
-                         << program[dst] << "\n";
+                    debug_instr(instruction, 3, addr_mode, opd);
                 }
+                program[opd[2]] = opcode == 1 ? opd[0] + opd[1]         // 1
+                                              : opd[0] * opd[1];        // 2
                 break;
             }
             case 3: {       // input
-                const size_t dst = program[pc++];
-                assert(addr_mode[0] == 0);  // destination always immediate
+                addr_mode[0] = 1;       // destination address
+                size_t opd[1];
+                decode_operands(program, pc, 1, addr_mode, opd);
+                if (debug) {
+                    debug_instr(instruction, 1, addr_mode, opd);
+                }
                 cout << "Input? ";
                 std::string str;
                 cin >> str;
-                program[dst] = stoi(str);
-                if (debug) {
-                    cerr << "input: " << dst << " := " << program[dst] << "\n";
-                }
+                program[opd[0]] = stoi(str);
                 break;
             }
             case 4: {       // output
-                const size_t src = program[pc++];
-                const int opd0 = addr_mode[0] == 0 ? program[src] : src;
+                size_t opd[1];
+                decode_operands(program, pc, 1, addr_mode, opd);
                 if (debug) {
-                    cerr << "output: src=" << src << "\n";
+                    debug_instr(instruction, 1, addr_mode, opd);
                 }
-                cout << "Output [" << src << "]/" << addr_mode[0] << ": "
-                     << opd0 << "\n";
+                cout << "Output: " << opd[0] << "\n";
                 break;
             }
             default: {
-                cerr << "bad instruction: " << program[pc] << "\n";
+                cerr << "bad instruction: " << instruction << "\n";
                 exit(-1);
             }
         }
