@@ -91,60 +91,110 @@ void debug_instr(const int instruction,
         }
         cerr << operands[i];
     }
-    cerr << ")\n";
+    cerr << ") ";
 }
 
 
 void run_intcode(int* program, const size_t length, const bool debug = false)
 {
-    if (debug) {
-        for (size_t pc = 0; pc < length; ++pc) {
-            cerr << "[" << pc << "] = " << program[pc] << "\n";
-        }
-    }
+    //if (debug) {
+    //    for (size_t pc = 0; pc < length; ++pc) {
+    //        cerr << "[" << pc << "] = " << program[pc] << "\n";
+    //    }
+    //}
 
     size_t pc = 0;
     while (pc < length && program[pc] != 99) {
         if (debug) {
-            cerr << "PC=" << pc << "\n";
+            cerr << "PC=" << pc << " >>> ";
         }
         const size_t instruction = program[pc++];
         size_t opcode;
         size_t addr_mode[MAX_OPERANDS];
+        size_t opd[MAX_OPERANDS];
         decode_instruction(instruction, opcode, addr_mode);
         switch (opcode) {
-            case 1:         // add (1) and multiply (2)
-            case 2: {
+            case 1:         // add
                 addr_mode[2] = 1;       // destination address
-                size_t opd[3];
                 decode_operands(program, pc, 3, addr_mode, opd);
+                program[opd[2]] = opd[0] + opd[1];
                 if (debug) {
                     debug_instr(instruction, 3, addr_mode, opd);
+                    cerr << " ::: [" << opd[2] << "] := " << program[opd[2]] << "\n";
                 }
-                program[opd[2]] = opcode == 1 ? opd[0] + opd[1]         // 1
-                                              : opd[0] * opd[1];        // 2
+                break;
+            case 2: {
+                addr_mode[2] = 1;       // destination address
+                decode_operands(program, pc, 3, addr_mode, opd);
+                program[opd[2]] = opd[0] * opd[1];
+                if (debug) {
+                    debug_instr(instruction, 3, addr_mode, opd);
+                    cerr << " ::: [" << opd[2] << "] := " << program[opd[2]] << "\n";
+                }
                 break;
             }
             case 3: {       // input
                 addr_mode[0] = 1;       // destination address
-                size_t opd[1];
                 decode_operands(program, pc, 1, addr_mode, opd);
-                if (debug) {
-                    debug_instr(instruction, 1, addr_mode, opd);
-                }
                 cout << "Input? ";
                 std::string str;
                 cin >> str;
                 program[opd[0]] = stoi(str);
+                if (debug) {
+                    debug_instr(instruction, 1, addr_mode, opd);
+                    cerr << " ::: [" << opd[0] << "] := " << program[opd[0]] << "\n";
+                }
                 break;
             }
             case 4: {       // output
-                size_t opd[1];
                 decode_operands(program, pc, 1, addr_mode, opd);
                 if (debug) {
                     debug_instr(instruction, 1, addr_mode, opd);
+                    cerr << " ::: ";
                 }
                 cout << "Output: " << opd[0] << "\n";
+                break;
+            }
+            case 5: {       // jump-if-true
+                decode_operands(program, pc, 2, addr_mode, opd);
+                if (opd[0] != 0) {
+                    pc = opd[1];
+                }
+                if (debug) {
+                    debug_instr(instruction, 2, addr_mode, opd);
+                    cerr << " ::: PC := " << pc << "\n";
+                }
+                break;
+            }
+            case 6: {       // jump-if-false
+                decode_operands(program, pc, 2, addr_mode, opd);
+                if (opd[0] == 0) {
+                    pc = opd[1];
+                }
+                if (debug) {
+                    debug_instr(instruction, 2, addr_mode, opd);
+                    cerr << " ::: PC := " << pc << "\n";
+                }
+                break;
+            }
+            case 7: {       // less than
+                addr_mode[2] = 1;       // destination address
+                decode_operands(program, pc, 3, addr_mode, opd);
+                program[opd[2]] = opd[0] < opd[1] ? 1 : 0;
+                if (debug) {
+                    debug_instr(instruction, 3, addr_mode, opd);
+                    cerr << " ::: [" << opd[2] << "] := " << program[opd[2]] << "\n";
+                }
+                break;
+            }
+            case 8: {       // equals
+                addr_mode[2] = 1;       // destination address
+                decode_operands(program, pc, 3, addr_mode, opd);
+                program[opd[2]] = opd[0] == opd[1] ? 1 : 0;
+                if (debug) {
+                    debug_instr(instruction, 3, addr_mode, opd);
+                    cerr << " ::: [" << opd[2] << "] := " << program[opd[2]] << "\n";
+                }
                 break;
             }
             default: {
@@ -172,11 +222,11 @@ int main(const int argc, const char* argv[])
     // part 1
     run_intcode(program, length, DEBUG);
 
-    if (DEBUG) {
-        for (size_t pc = 0; pc < length; ++pc) {
-            cerr << "[" << pc << "] = " << program[pc] << "\n";
-        }
-    }
+    //if (DEBUG) {
+    //    for (size_t pc = 0; pc < length; ++pc) {
+    //        cerr << "[" << pc << "] = " << program[pc] << "\n";
+    //    }
+    //}
 
     exit(0);
 }
