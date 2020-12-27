@@ -211,11 +211,6 @@ int main(const int argc, const char* argv[])
     size_t length;
     read_intcode(argv[1], program, length);
 
-    int* backup = new int[length];
-    for (size_t i = 0; i < length; ++i) {
-        backup[i] = program[i];
-    }
-
     // part 1
     run_intcode(program, length, DEBUG);
 
