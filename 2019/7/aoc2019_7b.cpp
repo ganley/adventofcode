@@ -63,7 +63,7 @@ public:
                     assert(opd[0] < m_length);
                     if (input_ix >= num_inputs) {
                         m_state = WAIT;
-                        --m_pc;     // rewind to start of input instruction
+                        m_pc -= 2;     // rewind to start of input instruction
                         return -1;
                     }
                     m_memory[opd[0]] = inputs[input_ix++];
