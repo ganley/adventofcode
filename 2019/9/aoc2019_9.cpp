@@ -24,53 +24,47 @@ public:
 
         size_t input_ix = 0;
 
-        while (m_pc < m_length) {
+        while (m_pc < m_size) {
             if (debug) {
                 cerr << "PC=" << m_pc << " >>> ";
             }
             const mem_t instruction = m_memory[m_pc++];
             mem_t opcode;
             mem_t addr_mode[MAX_OPERANDS];
-            mem_t opd[MAX_OPERANDS];
+            mem_t* opd[MAX_OPERANDS];
             decode_instruction(instruction, opcode, addr_mode);
             switch (opcode) {
                 case 1:                // add
-                    addr_mode[2] = 1;  // destination address
                     decode_operands(3, addr_mode, opd);
-                    assert(opd[2] < m_length);
-                    m_memory[opd[2]] = opd[0] + opd[1];
+                    *(opd[2]) = *(opd[0]) + *(opd[1]);
                     if (debug) {
                         debug_instr(instruction, 3, addr_mode, opd);
-                        cerr << " ::: [" << opd[2] << "] := " << m_memory[opd[2]]
-                            << "\n";
+                        cerr << " ::: [" << (opd[2] - m_memory) << "] := "
+                             << *(opd[2]) << "\n";
                     }
                     break;
                 case 2: {
-                    addr_mode[2] = 1;  // destination address
                     decode_operands(3, addr_mode, opd);
-                    assert(opd[2] < m_length);
-                    m_memory[opd[2]] = opd[0] * opd[1];
+                    *(opd[2]) = *(opd[0]) * *(opd[1]);
                     if (debug) {
                         debug_instr(instruction, 3, addr_mode, opd);
-                        cerr << " ::: [" << opd[2] << "] := " << m_memory[opd[2]]
-                            << "\n";
+                        cerr << " ::: [" << (opd[2] - m_memory) << "] := "
+                             << *(opd[2]) << "\n";
                     }
                     break;
                 }
                 case 3: {              // input
-                    addr_mode[0] = 1;  // destination address
                     decode_operands(1, addr_mode, opd);
-                    assert(opd[0] < m_length);
                     if (input_ix >= num_inputs) {
                         m_state = WAIT;
                         m_pc -= 2;     // rewind to start of input instruction
-                        return -1;
+                        return 0;
                     }
-                    m_memory[opd[0]] = inputs[input_ix++];
+                    *(opd[0]) = inputs[input_ix++];
                     if (debug) {
                         debug_instr(instruction, 1, addr_mode, opd);
-                        cerr << " ::: [" << opd[0] << "] := " << m_memory[opd[0]]
-                            << "\n";
+                        cerr << " ::: [" << (opd[0] - m_memory) << "] := "
+                             << *(opd[0]) << "\n";
                     }
                     break;
                 }
@@ -78,14 +72,14 @@ public:
                     decode_operands(1, addr_mode, opd);
                     if (debug) {
                         debug_instr(instruction, 1, addr_mode, opd);
-                        cerr << " ::: " << opd[0] << "\n";
+                        cerr << " ::: " << *(opd[0]) << "\n";
                     }
-                    return opd[0];
+                    return *(opd[0]);
                 }
                 case 5: {  // jump-if-true
                     decode_operands(2, addr_mode, opd);
-                    if (opd[0] != 0) {
-                        m_pc = opd[1];
+                    if (*(opd[0]) != 0) {
+                        m_pc = *(opd[1]);
                     }
                     if (debug) {
                         debug_instr(instruction, 2, addr_mode, opd);
@@ -95,8 +89,8 @@ public:
                 }
                 case 6: {  // jump-if-false
                     decode_operands(2, addr_mode, opd);
-                    if (opd[0] == 0) {
-                        m_pc = opd[1];
+                    if (*(opd[0]) == 0) {
+                        m_pc = *(opd[1]);
                     }
                     if (debug) {
                         debug_instr(instruction, 2, addr_mode, opd);
@@ -105,26 +99,32 @@ public:
                     break;
                 }
                 case 7: {              // less than
-                    addr_mode[2] = 1;  // destination address
                     decode_operands(3, addr_mode, opd);
-                    assert(opd[2] < m_length);
-                    m_memory[opd[2]] = opd[0] < opd[1] ? 1 : 0;
+                    *(opd[2]) = *(opd[0]) < *(opd[1]) ? 1 : 0;
                     if (debug) {
                         debug_instr(instruction, 3, addr_mode, opd);
-                        cerr << " ::: [" << opd[2] << "] := " << m_memory[opd[2]]
-                            << "\n";
+                        cerr << " ::: [" << (opd[2] - m_memory) << "] := "
+                             << *(opd[2]) << "\n";
                     }
                     break;
                 }
                 case 8: {              // equals
-                    addr_mode[2] = 1;  // destination address
                     decode_operands(3, addr_mode, opd);
-                    assert(opd[2] < m_length);
-                    m_memory[opd[2]] = opd[0] == opd[1] ? 1 : 0;
+                    *(opd[2]) = *(opd[0]) == *(opd[1]) ? 1 : 0;
                     if (debug) {
                         debug_instr(instruction, 3, addr_mode, opd);
-                        cerr << " ::: [" << opd[2] << "] := " << m_memory[opd[2]]
-                            << "\n";
+                        cerr << " ::: [" << (opd[2] - m_memory) << "] := "
+                             << *(opd[2]) << "\n";
+                    }
+                    break;
+                }
+                case 9: {               // adjust relative base
+                    decode_operands(1, addr_mode, opd);
+                    m_relbase += *(opd[0]);
+                    if (debug) {
+                        debug_instr(instruction, 1, addr_mode, opd);
+                        cerr << " ::: relbase += " << *(opd[0])
+                             << " now " << m_relbase << "\n";
                     }
                     break;
                 }
@@ -133,7 +133,7 @@ public:
                         cerr << "halt\n";
                     }
                     m_state = HALT;
-                    return -1;
+                    return 0;
                 }
                 default: {
                     cerr << "bad instruction: " << instruction << "\n";
@@ -153,12 +153,10 @@ public:
             const auto out = run(inputs, num_inputs, debug);
             switch (m_state) {
             case RUN:
-                assert(out >= 0);
                 cout << "Output: " << out << "\n";
                 num_inputs = 0;
                 break;
             case WAIT:
-                assert(out == -1);
                 cout << "Input? ";
                 cin >> inputs[0];
                 num_inputs = 1;
@@ -179,9 +177,13 @@ public:
 
         vector<string> prog_tokens = tokenize(prog_str, ",");
         m_length = prog_tokens.size();
-        m_memory = new mem_t[m_length];
+        m_size = m_length + EXTRA_MEM;
+        m_memory = new mem_t[m_size];
         for (size_t i = 0; i < m_length; ++i) {
             m_memory[i] = atoll(prog_tokens[i].c_str());
+        }
+        for (size_t i = m_length; i < m_size; ++i) {
+            m_memory[i] = 0;
         }
 
         reset();
@@ -190,6 +192,7 @@ public:
     void reset()
     {
         m_pc = 0;
+        m_relbase = 0;
         m_state = INIT;
     }
 
@@ -200,7 +203,9 @@ public:
 
     Program()
     :   m_pc(0),
+        m_relbase(0),
         m_length(0),
+        m_size(0),
         m_memory(nullptr),
         m_state(INIT)
     {
@@ -208,11 +213,13 @@ public:
 
     Program(const Program& rhs)
     :   m_pc(rhs.m_pc),
+        m_relbase(rhs.m_relbase),
         m_length(rhs.m_length),
+        m_size(rhs.m_size),
         m_state(rhs.m_state)
     {
-        m_memory = new mem_t[m_length];
-        for (size_t i = 0; i < m_length; ++i) {
+        m_memory = new mem_t[m_size];
+        for (size_t i = 0; i < m_size; ++i) {
             m_memory[i] = rhs.m_memory[i];
         }
     }
@@ -220,9 +227,11 @@ public:
     const Program& operator=(const Program& rhs)
     {
         m_pc = rhs.m_pc;
+        m_relbase = rhs.m_relbase;
         m_length = rhs.m_length;
-        m_memory = new mem_t[m_length];
-        for (size_t i = 0; i < m_length; ++i) {
+        m_size = rhs.m_size;
+        m_memory = new mem_t[m_size];
+        for (size_t i = 0; i < m_size; ++i) {
             m_memory[i] = rhs.m_memory[i];
         }
         m_state = rhs.m_state;
@@ -244,24 +253,38 @@ private:
              i < MAX_OPERANDS;
              ++i, op /= 10) {
             addr_mode[i] = op % 10;
+            assert((addr_mode[i] >= 0) && (addr_mode[i] <= 2));
         }
     }
 
     void decode_operands(const size_t opd_count,
                          const mem_t* addr_mode,
-                         mem_t* operands)
+                         mem_t* operands[])
     {
         assert(opd_count <= MAX_OPERANDS);
         for (size_t i = 0; i < opd_count; ++i) {
-            const mem_t raw = m_memory[m_pc++];
-            operands[i] = addr_mode[i] == 0 ? m_memory[raw] : raw;
+            mem_t* raw = &(m_memory[m_pc++]);
+            switch (addr_mode[i]) {
+            case 0:
+                operands[i] = &(m_memory[*raw]);
+                break;
+            case 1:
+                operands[i] = raw;
+                break;
+            case 2:
+                operands[i] = &(m_memory[*raw + m_relbase]);
+                break;
+            default:
+                assert(false);
+                break;
+            }
         }
     }
 
     static void debug_instr(const mem_t instruction,
                             const size_t opd_count,
                             const mem_t* const addr_mode,
-                            const mem_t* const operands)
+                            const mem_t* const operands[])
     {
         cerr << "instr " << instruction << " = " << (instruction % 100) << "/";
         assert(opd_count <= MAX_OPERANDS);
@@ -276,18 +299,21 @@ private:
             if (i > 0) {
                 cerr << ",";
             }
-            cerr << operands[i];
+            cerr << *(operands[i]);
         }
         cerr << ") ";
     }
 
 private:
     size_t m_pc = 0;
+    size_t m_relbase = 0;
     size_t m_length = 0;
+    size_t m_size = 0;
     mem_t* m_memory = nullptr;
     state_t m_state = INIT;
 
     static constexpr size_t MAX_OPERANDS = 3;
+    static constexpr size_t EXTRA_MEM = 10000;
 };
 
 
