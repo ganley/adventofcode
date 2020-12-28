@@ -9,7 +9,7 @@ how likely it is to be dealt hands that result in an infinitely looping game.
 
 Anyway...
 
-sample.txt -> aoc22.py -> 306 (part 1) and 291 (part 2)
+sample.txt -> aoc2020\_22.py -> 306 (part 1) and 291 (part 2)
 
-input.txt -> aoc22.py -> 35005 (part 1) and 32751 (part 2)
+input.txt -> aoc2020\_22.py -> 35005 (part 1) and 32751 (part 2)
 

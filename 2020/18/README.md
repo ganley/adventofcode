@@ -17,9 +17,9 @@ precedence.
 Part 2: Same, but now `+`, and `*` have the reverse of the usual precedence,
 i.e. `+` is higher.
 
-The code for part 1 and part 2 are both in aoc18.py, with part 1 commented
-out. (They're both just calls to the same machinery with different sets of
-precedences.)
+The code for part 1 and part 2 are both in `aoc2020_18.py`, with part 1
+commented out. (They're both just calls to the same machinery with different
+sets of precedences.)
 
 sample1.txt -> 71 (part 1) and 231 (part 2)
 

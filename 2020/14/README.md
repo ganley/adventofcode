@@ -19,10 +19,10 @@ any bit that is 1 in the mask to 1, leaves bits that are 0 in the mask alone,
 and enumerates all possible values for the X bits in the mask, setting the
 values of all of those addresses to the operand.
 
-aoc14a.py -> sample1.txt -> 165
+sample1.txt -> aoc2020\_14a.py -> 165
 
-aoc14a.py -> input.txt -> 10717676595607
+input.txt -> aoc2020\_14a.py -> 10717676595607
 
-aoc14b.py -> sample2.txt -> 208
+sample2.txt -> aoc2020\_14b.py -> 208
 
-aoc14b.py -> input.txt -> 3974538275659
+input.txt -> aoc2020\_14b.py -> 3974538275659

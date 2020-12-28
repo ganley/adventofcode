@@ -20,6 +20,6 @@ Part 2: What is the 30,000,000th number spoken?
 To my mild surprise, I was able to use the exact same code for Part 2 as for
 Part 1.
 
-sample1.txt -> aoc15.py -> 436 (part 1) and 175594 (part 2)
+sample1.txt -> aoc2020\_15.py -> 436 (part 1) and 175594 (part 2)
 
-input.txt -> aoc15.py -> 260 (part 1) and 950 (part 2)
+input.txt -> aoc2020\_15.py -> 260 (part 1) and 950 (part 2)

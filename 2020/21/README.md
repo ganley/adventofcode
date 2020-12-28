@@ -12,7 +12,7 @@ Part 2: Figure out the mapping of allergens to ingredients, return a
 comma-separated list of the plaintext allergens sorted by their encrypted
 ingredient names.
 
-sample.txt -> aoc21.py -> 5 (part 1) and mxmxvkd,sqjhc,fvjkl (part 2)
+sample.txt -> aoc2020\_21.py -> 5 (part 1) and mxmxvkd,sqjhc,fvjkl (part 2)
 
-input.txt -> aoc21.py -> 2786 (part 1) and
+input.txt -> aoc2020\_21.py -> 2786 (part 1) and
 prxmdlz,ncjv,knprxg,lxjtns,vzzz,clg,cxfz,qdfpq (part 2)

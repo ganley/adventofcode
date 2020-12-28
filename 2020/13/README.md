@@ -30,16 +30,16 @@ I grabbed the CRT code from
 [Rosetta Code](https://rosettacode.org/wiki/Chinese_remainder_theorem#Python_3.6),
 though I believe I fully understand it now and could reproduce it if I had to.
 
-sample.txt -> aoc13a.py -> 295
+sample.txt -> aoc2020\_13a.py -> 295
 
-input.txt -> aoc13a.py -> 4207
+input.txt -> aoc2020\_13a.py -> 4207
 
-sample.txt -> aoc13b.py -> 1068781
+sample.txt -> aoc2020\_13b.py -> 1068781
 
-input.txt -> aoc13b.py -> 725850285300475
+input.txt -> aoc2020\_13b.py -> 725850285300475
 
 Addendum: It turns out that searching is plenty fast if you apply a simple but
 clever observation that I owe to my colleague Bradley Welsh. Namely, from a
 timestamp that works for the first *n* buses, you can skip forward from there
 by the product of all *n* of those bus numbers. This is implemented in
-`aoc13b_alt.py`.
+`aoc2020\_13b_alt.py`.

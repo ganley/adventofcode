@@ -19,9 +19,9 @@ by whether the sum of invalid values is positive (as I was) you're going to
 let through some invalid tickets, which is going to leave no solution for
 part 2. That cost me at least half an hour.
 
-sample.txt -> aoc16.py -> 71 (part 1) - part 2 N/A
+sample.txt -> aoc2020\_16.py -> 71 (part 1) - part 2 N/A
 
-input.txt -> aoc16.py -> 30869 (part 1) and 4381476149273 (part 2)
+input.txt -> aoc2020\_16.py -> 30869 (part 1) and 4381476149273 (part 2)
 
 This code is not as polished as it could be; some things are done procedurally
 that could be rewritten functionally, and some things are done less efficiently

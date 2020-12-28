@@ -9,7 +9,7 @@ Part 2: Find a contiguous subarray of length at least 2 that sums to the bad
 number from part 1, and return the sum of the max and min values in that
 subarray.
 
-input.txt -> aoc9.py -> 258585477 (part 1) and 36981213 (part 2)
+input.txt -> aoc2020\_9.py -> 258585477 (part 1) and 36981213 (part 2)
 
 For part 2, the desired subarray is indices 479 to 495.
 

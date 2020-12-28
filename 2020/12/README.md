@@ -20,11 +20,11 @@ I then did Part 2 without trig (and also without the fancy dict dispatch I used
 in Part 1). Let this be a lesson: Look at the inputs to verify any assumptions
 you've made before you begin.
 
-aoc12a.py -> sample.py -> 25
+sample.txt -> aoc2020\_12a.py -> 25
 
-aoc12a.py -> input.py -> 796
+input.txt -> aoc2020\_12a.py -> 796
 
-aoc12b.py -> sample.py -> 286
+sample.txt -> aoc2020\_12b.py -> 286
 
-aoc12b.py -> input.py -> 39446
+input.txt -> aoc2020\_12b.py -> 39446
 

@@ -2,6 +2,6 @@
 
 [Puzzle](https://adventofcode.com/2020/day/25)
 
-sample.txt -> aoc25.py -> 14897079
+sample.txt -> aoc2020\_25.py -> 14897079
 
-input.txt -> aoc25.py -> 16902792
+input.txt -> aoc2020\_25.py -> 16902792

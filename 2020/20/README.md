@@ -17,9 +17,9 @@ both vertical and horizontal compatibility, but anyway.) Even aside from such
 fancy business, my solution does a *lot* of unnecessary copying, most of which
 could be eliminated with a little work.
 
-sample.txt -> aoc20.py -> 20899048083289 (part 1) and 273 (part 2)
+sample.txt -> aoc2020\_20.py -> 20899048083289 (part 1) and 273 (part 2)
 
-input.txt -> aoc20.py -> 47213728755493 (part 1) and 1599 (part 2)
+input.txt -> aoc2020\_20.py -> 47213728755493 (part 1) and 1599 (part 2)
 
 Later, a coworker pointed out a property that was given that I missed, and
 that could be used to make the solution more efficient: The sides that face

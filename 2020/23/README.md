@@ -30,15 +30,15 @@ that route.
 For both parts, the sample and input values are hardwired in the code; you
 have to uncommment the one you want.
 
-aoc23a.py with sample input -> 67384529
+aoc2020\_23a.py with sample input -> 67384529
 
-aoc23a.py with real input -> 47598263
+aoc2020\_23a.py with real input -> 47598263
 
-Compile aoc23b.cpp in the obvious way.
+Compile aoc2020\_23b.cpp in the obvious way.
 
-aoc23b.cpp with sample input -> 149245887792
+aoc2020\_23b.cpp with sample input -> 149245887792
 
-aoc23b.cpp with real input -> 248009574232
+aoc2020\_23b.cpp with real input -> 248009574232
 
 I later realized I could have stuck with Python and just used a dictionary
 mapping label to next label. Oh well.

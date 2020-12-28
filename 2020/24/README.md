@@ -16,6 +16,6 @@ of black tiles after 100 iterations.
 
 Once again I got to reuse my code from Day 11.
 
-aoc24.py -> sample.txt -> 10 (part 1) and 2208 (part 2)
+aoc2020\_24.py -> sample.txt -> 10 (part 1) and 2208 (part 2)
 
-aoc24.py -> input.txt -> 339 (part 1) and 3794 (part 2)
+aoc2020\_24.py -> input.txt -> 339 (part 1) and 3794 (part 2)

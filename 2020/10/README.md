@@ -22,11 +22,11 @@ create a gap of 4 to the next one), but you can remove up to 2 of any of the
 remaining ones. The answer is the product of the values of this expression for
 every streak of delta-1's. The code might be clearer than that explanation.
 
-sample1.txt -> aoc10.py -> 35 (part 1) and 8 (part 2)
+sample1.txt -> aoc2020\_10.py -> 35 (part 1) and 8 (part 2)
 
-sample2.txt -> aoc10.py -> 220 (part 1) and 19208 (part 2)
+sample2.txt -> aoc2020\_10.py -> 220 (part 1) and 19208 (part 2)
 
-input.txt -> aoc10.py -> 2475 (part 1) and 442136281481216 (part 2)
+input.txt -> aoc2020\_10.py -> 2475 (part 1) and 442136281481216 (part 2)
 
 Note: The problem specification stated that there could be adapters with a
 gap of 2 from the next-lower one, but none appear in the input. Beware for
