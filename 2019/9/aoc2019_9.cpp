@@ -14,24 +14,24 @@ static vector<string> tokenize(string str, const string delimiter = " ");
 class Program {
 public:
     typedef enum { INIT, RUN, WAIT, HALT } state_t;
+    typedef long long int mem_t;
 
-    int run(const int* const inputs,
-            const size_t num_inputs,
-            const bool debug = false)
+    mem_t run(const mem_t* const inputs,
+              const size_t num_inputs,
+              const bool debug = false)
     {
         m_state = RUN;
 
-        int input_ix = 0;
-        int last_output = -1;
+        size_t input_ix = 0;
 
         while (m_pc < m_length) {
             if (debug) {
                 cerr << "PC=" << m_pc << " >>> ";
             }
-            const int instruction = m_memory[m_pc++];
-            int opcode;
-            int addr_mode[MAX_OPERANDS];
-            int opd[MAX_OPERANDS];
+            const mem_t instruction = m_memory[m_pc++];
+            mem_t opcode;
+            mem_t addr_mode[MAX_OPERANDS];
+            mem_t opd[MAX_OPERANDS];
             decode_instruction(instruction, opcode, addr_mode);
             switch (opcode) {
                 case 1:                // add
@@ -141,13 +141,13 @@ public:
                 }
             }
         }
-    
-        return last_output;
+
+        assert(false);
     }
 
     void run_interactive(const bool debug = false)
     {
-        int inputs[1];
+        mem_t inputs[1];
         size_t num_inputs = 0;
         while (m_state != HALT) {
             const auto out = run(inputs, num_inputs, debug);
@@ -179,9 +179,9 @@ public:
 
         vector<string> prog_tokens = tokenize(prog_str, ",");
         m_length = prog_tokens.size();
-        m_memory = new int[m_length];
+        m_memory = new mem_t[m_length];
         for (size_t i = 0; i < m_length; ++i) {
-            m_memory[i] = atoi(prog_tokens[i].c_str());
+            m_memory[i] = atoll(prog_tokens[i].c_str());
         }
 
         reset();
@@ -211,8 +211,8 @@ public:
         m_length(rhs.m_length),
         m_state(rhs.m_state)
     {
-        m_memory = new int[m_length];
-        for (int i = 0; i < m_length; ++i) {
+        m_memory = new mem_t[m_length];
+        for (size_t i = 0; i < m_length; ++i) {
             m_memory[i] = rhs.m_memory[i];
         }
     }
@@ -221,8 +221,8 @@ public:
     {
         m_pc = rhs.m_pc;
         m_length = rhs.m_length;
-        m_memory = new int[m_length];
-        for (int i = 0; i < m_length; ++i) {
+        m_memory = new mem_t[m_length];
+        for (size_t i = 0; i < m_length; ++i) {
             m_memory[i] = rhs.m_memory[i];
         }
         m_state = rhs.m_state;
@@ -235,9 +235,9 @@ public:
     }
 
 private:
-    static void decode_instruction(const int instruction,
-                                   int& opcode,
-                                   int* addr_mode)  // addr_mode[MAX_OPERANDS]
+    static void decode_instruction(const mem_t instruction,
+                                   mem_t& opcode,
+                                   mem_t* addr_mode)  // addr_mode[MAX_OPERANDS]
     {
         opcode = instruction % 100;
         for (size_t i = 0, op = instruction / 100;
@@ -248,31 +248,31 @@ private:
     }
 
     void decode_operands(const size_t opd_count,
-                         const int* addr_mode,
-                         int* operands)
+                         const mem_t* addr_mode,
+                         mem_t* operands)
     {
         assert(opd_count <= MAX_OPERANDS);
-        for (int i = 0; i < opd_count; ++i) {
-            const int raw = m_memory[m_pc++];
+        for (size_t i = 0; i < opd_count; ++i) {
+            const mem_t raw = m_memory[m_pc++];
             operands[i] = addr_mode[i] == 0 ? m_memory[raw] : raw;
         }
     }
 
-    static void debug_instr(const int instruction,
+    static void debug_instr(const mem_t instruction,
                             const size_t opd_count,
-                            const int* const addr_mode,
-                            const int* const operands)
+                            const mem_t* const addr_mode,
+                            const mem_t* const operands)
     {
         cerr << "instr " << instruction << " = " << (instruction % 100) << "/";
         assert(opd_count <= MAX_OPERANDS);
-        for (int i = 0; i < opd_count; ++i) {
+        for (size_t i = 0; i < opd_count; ++i) {
             if (i > 0) {
                 cerr << ".";
             }
             cerr << addr_mode[i];
         }
         cerr << " (";
-        for (int i = 0; i < opd_count; ++i) {
+        for (size_t i = 0; i < opd_count; ++i) {
             if (i > 0) {
                 cerr << ",";
             }
@@ -284,7 +284,7 @@ private:
 private:
     size_t m_pc = 0;
     size_t m_length = 0;
-    int* m_memory = nullptr;
+    mem_t* m_memory = nullptr;
     state_t m_state = INIT;
 
     static constexpr size_t MAX_OPERANDS = 3;
