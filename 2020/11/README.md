@@ -20,13 +20,9 @@ when it stabilizes?
 This code isn't as pythonic as I'd like, but I'm not going to take the time
 to tighten it up right now (or possibly ever).
 
-small.txt -> ooc11a.py or aoc11b.py -> 5
+small.txt -> ooc2020\_11.py or aoc2020\_11.py -> 5 (both parts)
 
-sample.txt -> aoc11a.py -> 37
+sample.txt -> aoc2020\_11.py -> 37 (part 1) and 26 (part 2)
 
-input.txt -> aoc11a.py -> 2359
-
-sample.txt -> aoc11b.py -> 26
-
-input.txt -> aoc11b.py -> 2131
+input.txt -> aoc2020\_11.py -> 2359 (part 1) and 2131 (part 2)
 
