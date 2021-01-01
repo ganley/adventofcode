@@ -20,7 +20,7 @@ when it stabilizes?
 This code isn't as pythonic as I'd like, but I'm not going to take the time
 to tighten it up right now (or possibly ever).
 
-small.txt -> ooc2020\_11.py or aoc2020\_11.py -> 5 (both parts)
+small.txt -> aoc2020\_11.py or aoc2020\_11.py -> 5 (both parts)
 
 sample.txt -> aoc2020\_11.py -> 37 (part 1) and 26 (part 2)
 
