@@ -41,5 +41,6 @@ input.txt -> aoc2020\_13b.py -> 725850285300475
 Addendum: It turns out that searching is plenty fast if you apply a simple but
 clever observation that I owe to my colleague Bradley Welsh. Namely, from a
 timestamp that works for the first *n* buses, you can skip forward from there
-by the product of all *n* of those bus numbers. This is implemented in
-`aoc2020_13b_alt.py`.
+by the product of all *n* of those bus numbers (actually by the least common
+multiple of them, but since they're all prime, the LCM *is* the product).
+This is implemented in `aoc2020_13b_alt.py`.
