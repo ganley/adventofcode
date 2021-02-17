@@ -4,7 +4,7 @@
 using namespace std;
 
 
-// doubly-linked list node
+// linked list node
 class Node
 {
    public:
