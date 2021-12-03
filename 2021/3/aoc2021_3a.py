@@ -1,13 +1,4 @@
-# AOC skeleton 2021
-
-import copy
-import functools
-import itertools
-import math
-import re
-import string
 import sys
-
 
 
 if __name__ == "__main__":
