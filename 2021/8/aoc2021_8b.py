@@ -30,14 +30,15 @@ def vec(disp, perm):
 # return the resulting output number
 def decode(displays, output):
     for p in itertools.permutations(range(7)):
-        consistent = True
         for d in displays:
             if not vec(d, p) in digits:
-                consistent = False
                 break
-        if consistent:
+        else:
             break
+    else:
+        assert false     # no permutation worked; shouldn't happen
 
+    # when we get here, p is a permutation that works
     decoded = [str(digits[vec(o, p)]) for o in output]
     return int(''.join(decoded))
         
@@ -50,9 +51,7 @@ if __name__ == "__main__":
                 left, right = line.split('|')
                 displays = left.split()
                 output = right.split()
-
-                x = decode(displays, output)
-                total += x
+                total += decode(displays, output)
 
     print(total)
 
