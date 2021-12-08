@@ -26,7 +26,7 @@ def vec(disp, perm):
 
 
 # enumerate all permutations and when one is found that is consistent
-# with all of the output strings, use it to decode the outputs and
+# with all of the output strings, use it to decode the output digits and
 # return the resulting output number
 def decode(displays, output):
     for p in itertools.permutations(range(7)):
