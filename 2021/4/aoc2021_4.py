@@ -3,21 +3,17 @@ import sys
 
 def winner(b):
     for i in range(5):
-        win = True
         for j in range(5):
             if b[i][j] >= 0:
-                win = False
                 break
-        if win:
+        else:
             return True
 
     for j in range(5):
-        win = True
         for i in range(5):
             if b[i][j] >= 0:
-                win = False
                 break
-        if win:
+        else:
             return True
 
 
