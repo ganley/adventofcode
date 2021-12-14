@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
     # only count the first character in each pair, lest we count each
     # character twice. then add 1 more for the last character in the
-    # original template.
+    # original template (which is the last character in every template).
     c = {}
     for k, v in pairs.items():
         c[k[0]] = c.get(k[0], 0) + v
