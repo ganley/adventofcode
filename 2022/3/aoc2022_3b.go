@@ -18,7 +18,7 @@ func priority(c byte) int {
 // c is an array of items
 // each element has bit 0, 1, and 2 set according to whether that item
 // was contained in that elf index of each group of 3
-// we're lookng for the element that is in all 3 packs in each group of 3
+// we're looking for the element that is in all 3 packs in each group of 3
 
 func main() {
     var s int = 0
